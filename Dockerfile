@@ -7,10 +7,12 @@ RUN mkdir /api && \
     mkdir /results && \
     mkdir /infrastructure
 
-COPY apis/blog/ /api/
-COPY infrastructure/ /infrastructure/
+COPY ./apis/blog/ /api/
+COPY ./infrastructure/ /infrastructure/
+COPY ./apis/blog/entrypoint.sh /entrypoint.sh
 
-RUN apt update && \
+RUN chmod +x /entrypoint.sh && \
+    apt update && \
     apt -y upgrade && \
     apt -y install openjdk-11-jdk mysql-server mitmproxy python3-requests && \
     usermod -d /var/lib/mysql/ mysql && \
@@ -19,11 +21,8 @@ RUN apt update && \
     mysql -e "CREATE USER blog@localhost IDENTIFIED BY 'blog'" && \
     mysql -e "GRANT ALL PRIVILEGES ON blogapi.* TO blog@localhost" && \
     mysql blogapi < /api/database/blogapi.sql && \
-    apt -y autoremove
+    apt -y autoremove && \
+    rm -rf /var/lib/apt/lists/* && \
+    mysqladmin shutdown
 
-CMD mkdir -p /results/$API/$TOOL/$RUN && \
-    /etc/init.d/mysql start & \
-    sleep 20 && \
-    sh /infrastructure/jacoco/collect-coverage-interval.sh & \
-    mitmdump -p 9090 --mode reverse:http://localhost:8080/ -s /infrastructure/mitmproxy/store-interactions.py -s /api/auth.py & \
-    java -javaagent:/infrastructure/jacoco/org.jacoco.agent-0.8.7-runtime.jar=includes=*,output=tcpserver,port=12345,address=* -Dfile.encoding=UTF-8 -jar /api/blog-sut.jar
+ENTRYPOINT ["/entrypoint.sh"]
