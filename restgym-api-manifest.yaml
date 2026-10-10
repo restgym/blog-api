@@ -1,0 +1,21 @@
+# RESTgym API manifest
+manifest_version: 1
+
+id: blog
+name: Blog API
+version: "0.0.1-SNAPSHOT"         # Implementation-Version of blog-sut.jar
+description: Restful CRUD blog API (posts, comments, albums, photos, todos and users), secured with JWT.
+domain: content-management
+license: AGPL-3.0
+repository: https://github.com/WebFuzzing/Dataset    # originally from https://github.com/osopromadze/Spring-Boot-Blog-REST-API
+technology:
+  language: java
+  framework: Spring Boot          # 2.1.8
+  database: MySQL
+
+authentication: proxy
+
+server_errors:
+  similarity_threshold: 0.7       # manually confirmed (errors with identical text)
+  preprocessing:
+    - json_fields: {fields: [message], min_length: 5}
