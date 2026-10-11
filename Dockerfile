@@ -1,6 +1,5 @@
 FROM ubuntu:22.04
 
-ENV API=blog
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN mkdir /api && \
