@@ -9,10 +9,8 @@ RUN mkdir /api && \
 
 COPY ./apis/blog/ /api/
 COPY ./infrastructure/ /infrastructure/
-COPY ./apis/blog/entrypoint.sh /entrypoint.sh
 
-RUN chmod +x /entrypoint.sh && \
-    apt update && \
+RUN apt update && \
     apt -y upgrade && \
     apt -y install openjdk-11-jdk mysql-server mitmproxy python3-requests && \
     usermod -d /var/lib/mysql/ mysql && \
@@ -25,4 +23,7 @@ RUN chmod +x /entrypoint.sh && \
     rm -rf /var/lib/apt/lists/* && \
     mysqladmin shutdown
 
-ENTRYPOINT ["/entrypoint.sh"]
+# Startup script: starts the API, the collection of code coverage and the proxy (see infrastructure/api/restgym-api.sh)
+COPY ./apis/blog/entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT ["bash", "/entrypoint.sh"]
