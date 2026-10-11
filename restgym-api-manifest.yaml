@@ -13,6 +13,11 @@ technology:
   framework: Spring Boot          # 2.1.8
   database: MySQL
 
+original_specification:           # added to EMB in 2025 (the API has none): specifications/blog-openapi.json
+  version: "3.0"
+  format: json
+  origin: manual
+
 authentication: proxy
 
 server_errors:
