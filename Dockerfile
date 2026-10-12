@@ -1,6 +1,6 @@
 # Blog
 # Base image: Ubuntu 22.04, Java 11 (headless JRE), mitmproxy and the RESTgym infrastructure (see infrastructure/api/Dockerfile)
-FROM restgym-api-base:java11
+FROM restgym/api-base:java11
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
