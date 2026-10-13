@@ -7,16 +7,19 @@ version: "0.0.1-SNAPSHOT"         # Implementation-Version of blog-sut.jar
 description: Restful CRUD blog API (posts, comments, albums, photos, todos and users), secured with JWT.
 domain: content-management
 license: AGPL-3.0
-repository: https://github.com/WebFuzzing/Dataset    # originally from https://github.com/osopromadze/Spring-Boot-Blog-REST-API
+repository: https://github.com/osopromadze/Spring-Boot-Blog-REST-API    # through the WebFuzzing Dataset (EMB, https://github.com/WebFuzzing/Dataset), which added the specification
 technology:
   language: java
   framework: Spring Boot          # 2.1.8
   database: MySQL
 
-original_specification:           # added to EMB in 2025 (the API has none): specifications/blog-openapi.json
+original_specification:           # OpenAPI 3.0.0, added to EMB in 2025 (the API has none)
   version: "3.0"
   format: json
   origin: manual
+  created_by: EMB (WebFuzzing Dataset) developers
+  file: openapi-original.json
+  source: https://github.com/WebFuzzing/Dataset/blob/915859080da033fc36feae54bab3ad4a7b04e872/jdk_8_maven/cs/rest/original/blogapi/src/main/resources/static/blogapi.json
 
 authentication: proxy
 
