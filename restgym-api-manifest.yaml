@@ -18,7 +18,7 @@ original_specification:           # OpenAPI 3.0.0, added to EMB in 2025 (the API
   format: json
   origin: manual
   created_by: EMB (WebFuzzing Dataset) developers
-  file: openapi-original.json
+  file: original/blog-openapi.json
   source: https://github.com/WebFuzzing/Dataset/blob/915859080da033fc36feae54bab3ad4a7b04e872/jdk_8_maven/cs/rest/original/blogapi/src/main/resources/static/blogapi.json
 
 authentication: proxy
